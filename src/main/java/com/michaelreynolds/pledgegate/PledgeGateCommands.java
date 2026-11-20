@@ -16,6 +16,10 @@ public final class PledgeGateCommands {
 	private PledgeGateCommands() {}
 
 	public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
+
+		dispatcher.register(Commands.literal("rules")
+			.executes(PledgeGateCommands::preview));
+
 		dispatcher.register(Commands.literal("pledgegate")
 				.requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
 				.then(Commands.literal("reload")
