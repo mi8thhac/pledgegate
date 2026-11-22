@@ -40,11 +40,11 @@ public class PledgeGateConfig {
 	/** Block chat and commands from players who have not agreed yet. */
 	public boolean blockChatWhilePending = true;
 
-	public String checkboxLabel = "I have read and agree to the rules";
-	public String agreeButtonLabel = "Enter Server";
+	public String checkboxLabel = "I have read the rules";
+	public String agreeButtonLabel = "I Agree";
 	public String declineButtonLabel = "I Do Not Agree";
-	public String mustCheckWarning = "You must check the box below to agree to the rules!";
-	public String kickMessage = "You must agree to the server rules to play here.";
+	public String mustCheckWarning = "You must check the box below first!";
+	public String kickMessage = "You must agree to the server rules to play.";
 	public String timeoutKickMessage = "You did not respond to the rules prompt in time.";
 	/** Sent in chat after agreeing. Empty string disables. */
 	public String welcomeMessage = "&aThanks for agreeing to the rules. Have fun!";
