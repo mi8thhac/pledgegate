@@ -1,7 +1,7 @@
 {
 	"schemaVersion": 1,
 	"id": "pledgegate",
-	"version": "${version}",
+	"version": "1.3.0",
 	"name": "PledgeGate",
 	"description": "Requires players to read and agree to your server rules before they can play. Server-side only — players don't need to install anything.",
 	"authors": [
