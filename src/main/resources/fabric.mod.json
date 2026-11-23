@@ -8,8 +8,7 @@
 		"Michael Reynolds"
 	],
 	"contact": {
-		"homepage": "https://pledgegate.com",
-		"sources": "https://github.com/mbreyno/pledgegate"
+		"sources": "https://github.com/mi8thhac/pledgegate"
 	},
 	"license": "MIT",
 	"environment": "*",
@@ -23,7 +22,7 @@
 	],
 	"depends": {
 		"fabricloader": ">=0.19.3",
-		"minecraft": ">=26.1.2 <=26.3",
+		"minecraft": ">=26.1.2 <26.4",
 		"java": ">=25",
 		"fabric-api": "*"
 	}
