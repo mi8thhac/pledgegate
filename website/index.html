@@ -326,7 +326,7 @@
 <main>
 
 <figure class="shot">
-  <img src="screenshot-ingame.webp" alt="PledgeGate's server rules screen shown in-game on a vanilla Minecraft 26.2 client, with an agreement checkbox and Enter Server button" width="1600" height="999">
+  <img src="screenshot-ingame.webp" alt="PledgeGate's server rules screen shown in-game on a vanilla Minecraft 26.2 client, with a `I have read the rules` checkbox and I Agree button" width="1600" height="999">
   <figcaption>The real thing — PledgeGate's rules screen on a completely vanilla Minecraft 26.2 client.</figcaption>
 </figure>
 
@@ -353,16 +353,16 @@
     <div><span class="rule-num">3.</span> No cheating, hacking, or exploiting bugs.</div>
     <div><span class="rule-num">4.</span> No advertising other servers.</div>
   </div>
-  <div class="dcheck"><span class="box">✓</span>I have read and agree to the rules</div>
+  <div class="dcheck"><span class="box">✓</span>I have read the rules</div>
   <div class="dbtns">
-    <div class="dbtn go">Enter Server</div>
+    <div class="dbtn go">I Agree</div>
     <div class="dbtn">I Do Not Agree</div>
   </div>
 </div>
 <p class="demo-caption">A recreation of what players see in-game.</p>
 
 <ul style="color: var(--text-dim); padding-left: 24px;">
-  <li>Players must <strong style="color: var(--text);">tick the checkbox</strong> and click <strong style="color: var(--text);">Enter Server</strong> to play.</li>
+  <li>Players must <strong style="color: var(--text);">tick the checkbox</strong> and click <strong style="color: var(--text);">I Agree</strong> to play.</li>
   <li>Clicking <strong style="color: var(--text);">I Do Not Agree</strong> kicks them with a message you control.</li>
   <li>The dialog can't be closed with Escape, and players can't chat or run commands until they agree.</li>
   <li>Ignoring the prompt too long (default 5 minutes) also kicks them.</li>
@@ -420,11 +420,11 @@
   <span class="json-key">"repromptWhenRulesChange"</span>: <span class="json-bool">true</span>,
   <span class="json-key">"agreeTimeoutSeconds"</span>: <span class="json-num">300</span>,
   <span class="json-key">"blockChatWhilePending"</span>: <span class="json-bool">true</span>,
-  <span class="json-key">"checkboxLabel"</span>: <span class="json-str">"I have read and agree to the rules"</span>,
-  <span class="json-key">"agreeButtonLabel"</span>: <span class="json-str">"Enter Server"</span>,
+  <span class="json-key">"checkboxLabel"</span>: <span class="json-str">"I have read the rules"</span>,
+  <span class="json-key">"agreeButtonLabel"</span>: <span class="json-str">"I Agree"</span>,
   <span class="json-key">"declineButtonLabel"</span>: <span class="json-str">"I Do Not Agree"</span>,
-  <span class="json-key">"mustCheckWarning"</span>: <span class="json-str">"You must check the box below to agree to the rules!"</span>,
-  <span class="json-key">"kickMessage"</span>: <span class="json-str">"You must agree to the server rules to play here."</span>,
+  <span class="json-key">"mustCheckWarning"</span>: <span class="json-str">"You must check the box below first!"</span>,
+  <span class="json-key">"kickMessage"</span>: <span class="json-str">"You must agree to the server rules to play."</span>,
   <span class="json-key">"timeoutKickMessage"</span>: <span class="json-str">"You did not respond to the rules prompt in time."</span>,
   <span class="json-key">"welcomeMessage"</span>: <span class="json-str">"&amp;aThanks for agreeing to the rules. Have fun!"</span>
 }</code></pre>
@@ -446,8 +446,8 @@
   <p><strong>Display modes at a glance:</strong> use <code>"once"</code> for a classic "accept the rules on first join" gate. Use <code>"interval"</code> with <code>intervalDays: 7</code> to remind everyone weekly, or <code>3</code> for every few days. Either way, changing the rules text re-prompts everyone (unless you turn <code>repromptWhenRulesChange</code> off).</p>
 </div>
 
-<h2 id="commands">Admin commands</h2>
-<p class="section-intro">All commands require operator permission (level 2+).</p>
+<h2 id="admin commands">Admin commands</h2>
+<p class="section-intro">These commands require operator permission (level 2+).</p>
 
 <div class="table-wrap">
 <table>
@@ -456,6 +456,16 @@
   <tr><td><code>/pledgegate preview</code></td><td>Shows you the rules dialog without affecting your own acceptance — great for checking formatting.</td></tr>
   <tr><td><code>/pledgegate reset all</code></td><td>Wipes everyone's acceptance. Online players are re-prompted immediately.</td></tr>
   <tr><td><code>/pledgegate reset &lt;player&gt;</code></td><td>Wipes one player's acceptance; if they're online, they're re-prompted immediately.</td></tr>
+</table>
+</div>
+
+<h2 id="non-admin commands">non-admin commands</h2>
+<p class="section-intro">These commands have no permission requirements (level 0).</p>
+
+<div class="table-wrap">
+<table>
+  <tr><th>Command</th><th>Effect</th></tr>
+  <tr><td><code>/rules</code></td><td>Shows you the rules dialog without affecting your own acceptance.</td></tr>
 </table>
 </div>
 

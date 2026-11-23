@@ -3,7 +3,7 @@
 A server-side Fabric mod for Minecraft **26.1.2 – 26.2** that requires players to read and agree to your server rules before they can play.
 
 - **Players don't install anything.** PledgeGate uses Minecraft's built-in dialog screens, so completely vanilla clients see the rules popup with a real checkbox and buttons.
-- Players must tick **"I have read and agree to the rules"** and click **Enter Server**. Clicking **I Do Not Agree** (or ignoring the prompt) kicks them.
+- Players must tick **"I have read the rules"** and click **I Agree**. Clicking **I Do Not Agree** (or ignoring the prompt) kicks them.
 - Show the rules **once ever**, or **periodically** (every few days, weekly — whatever you choose).
 - Players are automatically re-prompted whenever you **change the rules** (optional).
 - While the prompt is open the player can't chat or run commands (optional), can't close the dialog with Escape, and is kicked after a timeout if they never respond.
@@ -31,11 +31,11 @@ A server-side Fabric mod for Minecraft **26.1.2 – 26.2** that requires players
   "repromptWhenRulesChange": true,
   "agreeTimeoutSeconds": 300,
   "blockChatWhilePending": true,
-  "checkboxLabel": "I have read and agree to the rules",
-  "agreeButtonLabel": "Enter Server",
+  "checkboxLabel": "I have read the rules",
+  "agreeButtonLabel": "I Agree",
   "declineButtonLabel": "I Do Not Agree",
-  "mustCheckWarning": "You must check the box below to agree to the rules!",
-  "kickMessage": "You must agree to the server rules to play here.",
+  "mustCheckWarning": "You must check the box below first!",
+  "kickMessage": "You must agree to the server rules to play.",
   "timeoutKickMessage": "You did not respond to the rules prompt in time.",
   "welcomeMessage": "&aThanks for agreeing to the rules. Have fun!"
 }
@@ -60,6 +60,12 @@ A server-side Fabric mod for Minecraft **26.1.2 – 26.2** that requires players
 | `/pledgegate preview` | Shows you the rules dialog without affecting your acceptance (buttons just close it). |
 | `/pledgegate reset all` | Wipes everyone's acceptance; online players are re-prompted immediately. |
 | `/pledgegate reset <player>` | Wipes one player's acceptance; if online, they're re-prompted immediately. |
+
+## Commands (no requirements / permission level 0)
+
+| Command | Effect |
+| --- | --- |
+| `/rules` | Shows you the rules dialog without affecting your acceptance (buttons just close it). |
 
 Acceptances are stored in `config/pledgegate/acceptances.json` (player UUID, name, timestamp, and which version of the rules they accepted). You can delete that file to reset everyone.
 

@@ -7,7 +7,7 @@ PledgeGate uses Minecraft's built-in dialog system, so completely vanilla client
 ## ✅ How it works
 
 - On join, players see your rules in a dialog they can't dismiss with Escape
-- They must tick **"I have read and agree to the rules"** and click **Enter Server**
+- They must tick **"I have read the rules"** and click **I Agree**
 - Clicking **I Do Not Agree** kicks them with a message you control
 - Ignoring the prompt kicks them after a timeout (5 minutes by default)
 - Until they agree, they can't chat or run commands
@@ -35,6 +35,12 @@ PledgeGate uses Minecraft's built-in dialog system, so completely vanilla client
 | `/pledgegate preview` | See the dialog exactly as players will |
 | `/pledgegate reset all` | Everyone must agree again |
 | `/pledgegate reset <player>` | One player must agree again |
+
+## 📋 Non-Admin commands (permission level 0)
+
+| Command | Effect |
+| --- | --- |
+| `/rules` | See the rules dialog again |
 
 ## 📖 Full documentation
 
