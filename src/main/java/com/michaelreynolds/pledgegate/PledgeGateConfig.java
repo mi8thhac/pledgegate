@@ -27,7 +27,12 @@ public class PledgeGateConfig {
 			"&e3. &fNo cheating, hacking, or exploiting bugs.",
 			"&e4. &fNo advertising other servers."
 	);
-
+	public String infoTitle = "Server Info";
+	public List<String> info = List.of(
+			"&e5. &fThe IP is xxx.xxx.x.xx:xxxx",
+			"&e6. &fThe seed is xxxxxxxxxxxxxxx",
+			"&e7. &fMy name is ABCDE"
+	);
 	/** "once" = accept a single time; "interval" = must re-accept every intervalDays. */
 	public String displayMode = "once";
 	/** Used when displayMode is "interval". Supports fractions (0.5 = every 12 hours). */
@@ -43,6 +48,7 @@ public class PledgeGateConfig {
 	public String checkboxLabel = "I have read the rules";
 	public String agreeButtonLabel = "I Agree";
 	public String declineButtonLabel = "I Do Not Agree";
+	public String closeButtonLabel = "Close"; //only shown when a player uses /rules or /info
 	public String mustCheckWarning = "You must check the box below first!";
 	public String kickMessage = "You must agree to the server rules to play.";
 	public String timeoutKickMessage = "You did not respond to the rules prompt in time.";

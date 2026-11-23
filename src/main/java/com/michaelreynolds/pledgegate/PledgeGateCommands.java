@@ -18,7 +18,10 @@ public final class PledgeGateCommands {
 	public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
 
 		dispatcher.register(Commands.literal("rules")
-			.executes(PledgeGateCommands::preview));
+			.executes(PledgeGateCommands::rules));
+
+		dispatcher.register(Commands.literal("info")
+			.executes(PledgeGateCommands::info));
 
 		dispatcher.register(Commands.literal("pledgegate")
 				.requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
@@ -55,6 +58,26 @@ public final class PledgeGateCommands {
 			return 0;
 		}
 		DialogManager.preview(player);
+		return 1;
+	}
+
+	private static int rules(CommandContext<CommandSourceStack> context) {
+		ServerPlayer player = context.getSource().getPlayer();
+		if (player == null) {
+			context.getSource().sendFailure(Component.literal("Only players can view the rules dialog."));
+			return 0;
+		}
+		DialogManager.viewRules(player);
+		return 1;
+	}
+
+	private static int info(CommandContext<CommandSourceStack> context) {
+		ServerPlayer player = context.getSource().getPlayer();
+		if (player == null) {
+			context.getSource().sendFailure(Component.literal("Only players can view the info dialog."));
+			return 0;
+		}
+		DialogManager.viewInfo(player);
 		return 1;
 	}
 

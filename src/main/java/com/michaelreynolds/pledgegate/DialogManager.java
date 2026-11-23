@@ -35,6 +35,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public final class DialogManager {
 	public static final Identifier ACCEPT_ID = Identifier.fromNamespaceAndPath(PledgeGate.MOD_ID, "accept");
 	public static final Identifier DECLINE_ID = Identifier.fromNamespaceAndPath(PledgeGate.MOD_ID, "decline");
+	public static final Identifier CLOSE_ID = Identifier.fromNamespaceAndPath(PledgeGate.MOD_ID, "close");
 	private static final String AGREED_KEY = "agreed";
 	private static final int BODY_WIDTH = 300;
 	private static final int BUTTON_WIDTH = 200;
@@ -63,6 +64,16 @@ public final class DialogManager {
 	/** Shows the dialog without requiring acceptance (admin preview). */
 	public static void preview(ServerPlayer player) {
 		openRulesDialog(player, false);
+	}
+
+	/** shows the rules (non-admin preview)*/
+	public static void viewRules(ServerPlayer player) {
+		openDialogWithoutAcpt(player, false, false);
+	}
+
+	/** shows the server info*/
+	public static void viewInfo(ServerPlayer player) {
+		openDialogWithoutAcpt(player, false, true);
 	}
 
 	public static void handleClick(ServerPlayer player, Identifier id, Optional<Tag> payload) {
@@ -95,6 +106,11 @@ public final class DialogManager {
 				openRulesDialog(player, true);
 			}
 		}
+
+		if (CLOSE_ID.equals(id)) {
+			closeDialog(player);
+			return;
+		}
 	}
 
 	/** Kicks pending players who ignored the prompt past the configured timeout. */
@@ -126,6 +142,10 @@ public final class DialogManager {
 
 	private static void openRulesDialog(ServerPlayer player, boolean withWarning) {
 		player.openDialog(Holder.direct(buildDialog(PledgeGate.config(), withWarning)));
+	}
+
+	private static void openDialogWithoutAcpt(ServerPlayer player, boolean withWarning, boolean isInfo) {
+		player.openDialog(Holder.direct(buildDialogWithoutAcpt(PledgeGate.config(), withWarning, isInfo)));
 	}
 
 	private static Dialog buildDialog(PledgeGateConfig config, boolean withWarning) {
@@ -161,6 +181,44 @@ public final class DialogManager {
 				Optional.of(new CustomAll(DECLINE_ID, Optional.empty())));
 
 		return new MultiActionDialog(common, List.of(agree), Optional.of(decline), 1);
+	}
+
+	private static Dialog buildDialogWithoutAcpt(PledgeGateConfig config, boolean withWarning, boolean isInfo) {
+		List<DialogBody> body = new ArrayList<>();
+		if (withWarning) {
+			body.add(new PlainMessage(
+					Component.literal(PledgeGateConfig.colorize(config.mustCheckWarning))
+							.withStyle(ChatFormatting.RED, ChatFormatting.BOLD),
+					BODY_WIDTH));
+			body.add(new PlainMessage(Component.empty(), BODY_WIDTH));
+		}
+		String title;
+		if (isInfo){
+			for (String info : config.info) {
+				body.add(new PlainMessage(Component.literal(PledgeGateConfig.colorize(info)), BODY_WIDTH));
+			}
+			title = config.infoTitle;
+		} else {
+			for (String rule : config.rules) {
+				body.add(new PlainMessage(Component.literal(PledgeGateConfig.colorize(rule)), BODY_WIDTH));
+			}
+			title = config.title;
+		}
+		CommonDialogData common = new CommonDialogData(
+				Component.literal(PledgeGateConfig.colorize(title)),
+				Optional.empty(),
+				true,               // can be closed with Escape
+				false,               // don't pause the game
+				DialogAction.NONE,   // stay open until the server clears it
+				body,
+				List.of()
+		);
+
+		ActionButton close = new ActionButton(
+				new CommonButtonData(Component.literal(PledgeGateConfig.colorize(config.closeButtonLabel)), BUTTON_WIDTH),
+				Optional.of(new CustomAll(CLOSE_ID, Optional.empty())));
+
+		return new MultiActionDialog(common, List.of(close), Optional.empty(), 1);
 	}
 
 	private static Component colored(String text) {
